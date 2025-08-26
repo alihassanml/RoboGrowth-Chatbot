@@ -1,6 +1,6 @@
 # Robo Growth Partners Chatbot
 
-![Chatbot Banner](./image.png)
+<!-- ![Chatbot Banner](./image.png) -->
 
 ## 🚀 Overview
 
