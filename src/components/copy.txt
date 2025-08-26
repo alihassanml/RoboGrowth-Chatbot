@@ -1,0 +1,17 @@
+{idx === messages.length - 1 && (
+          <Button size="sm" variant="light" onClick={() => copyToClipboard(msg.text)}>
+            <FiCopy />
+          </Button>
+        )}
+
+
+{msg.feedback === null ? (
+          <>
+            <Button size="sm" variant="light" onClick={() => handleFeedback(idx, 'like')}>
+              <FiThumbsUp />
+            </Button>
+            <Button size="sm" variant="light" onClick={() => handleFeedback(idx, 'dislike')}>
+              <FiThumbsDown />
+            </Button>
+          </>
+        ) : null}
