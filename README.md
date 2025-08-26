@@ -1,54 +1,116 @@
-# React + TypeScript + Vite
+# Robo Growth Partners Chatbot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Chatbot Banner](./image.png)
 
-Currently, two official plugins are available:
+## 🚀 Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is a modern, AI-powered chatbot designed for websites.
+It helps visitors connect instantly, captures leads (name + email), and provides intelligent answers through an **n8n backend workflow** powered by AI.
 
-## Expanding the ESLint configuration
+The chatbot can be easily installed and run locally for testing, or deployed on your own website.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## ✨ Features
+
+* 💬 Sleek, modern chat interface
+* 🧑‍💻 User onboarding (name + email capture)
+* 🤖 AI-powered responses via **n8n + OpenAI**
+* 💾 Chat history stored in browser session
+* 📱 Fully responsive design (works on desktop & mobile)
+* 🔧 Extendable UI with custom options (chat resizing, extra screens, meeting booking, etc.)
+
+---
+
+## 🛠️ Technologies
+
+* **Frontend:** React.js, TypeScript, Bootstrap, Framer Motion
+* **Backend (No-Code):** n8n workflows
+* **AI Integration:** OpenAI API (via n8n HTTP requests)
+* **Storage:** Browser sessionStorage
+
+---
+
+## 📦 Installation (Local Setup)
+
+Follow these steps to run the chatbot locally:
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/alihassanml/RoboGrowth-Chatbot.git
+cd RoboGrowth-Chatbot
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install Dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Make sure you have **Node.js (v16 or above)** installed.
+Then run:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
 ```
+
+### 3. Configure Backend (n8n)
+
+* Set up an **n8n instance** (local or cloud).
+* Create a workflow with an **HTTP Webhook** to receive chat messages.
+* Connect the workflow to the **OpenAI API** (or any AI API of your choice).
+* Update the frontend code with your n8n webhook URL inside `fetch(...)` calls.
+
+Example (inside the chatbot code):
+
+```ts
+const res = await fetch("https://your-n8n-instance/webhook/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ chat_ID: userId, message: userMessage })
+});
+```
+
+### 4. Start Development Server
+
+```bash
+npm run dev
+```
+
+Now open your browser at:
+
+```
+http://localhost:3000
+```
+
+Your chatbot will be running locally 🎉
+
+---
+
+## 📸 Screenshots
+
+* **Intro Screen:** Welcomes the user and offers quick help
+* **Form Screen:** Collects name and email before chatting
+* **Chat Screen:** Real-time AI conversation
+* **Book Meeting:** Optional integration with Calendly
+
+![Chat Example](https://chat.robogrowthpartners.online/)
+
+---
+
+## 🌐 Deployment
+
+Once tested locally, you can deploy the chatbot on:
+
+* **Vercel / Netlify** (recommended for React apps)
+* **Your own server**
+* **Embedded on any website** (via iframe or React integration)
+
+---
+
+## 📝 License
+
+MIT License – free to use, modify, and distribute.
+
+---
+
+## 📬 Support
+
+For questions or setup help, please contact the development team.
