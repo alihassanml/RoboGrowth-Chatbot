@@ -15,7 +15,7 @@ type Message = {
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const [screen, setScreen] = useState<'intro'  | 'chat'>('intro');
+  const [screen, setScreen] = useState<'intro' | 'chat'>('intro');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [input, setInput] = useState('');
@@ -126,12 +126,12 @@ const Chatbot = () => {
   };
 
   const handleFormSubmit = () => {
-      setScreen("chat");
-      const pendingPrompt = sessionStorage.getItem("pending_prompt");
-      const firstMessage = `User info: Name = ${name}, Email = ${email}${pendingPrompt ? `\n\n${pendingPrompt}` : ""}`;
-      handleBotResponse(firstMessage);
+    setScreen("chat");
+    const pendingPrompt = sessionStorage.getItem("pending_prompt");
+    const firstMessage = `User info: Name = ${name}, Email = ${email}${pendingPrompt ? `\n\n${pendingPrompt}` : ""}`;
+    handleBotResponse(firstMessage);
 
-      sessionStorage.removeItem("pending_prompt");
+    sessionStorage.removeItem("pending_prompt");
 
   };
 
@@ -141,7 +141,7 @@ const Chatbot = () => {
     // If no user info stored, send anonymous message
     const storedName = sessionStorage.getItem("chat_name");
     const storedEmail = sessionStorage.getItem("chat_email");
-    
+
     if (!storedName || !storedEmail) {
       // Start chat as anonymous user
       handleBotResponse("Hello, I'd like to start a conversation.");
@@ -194,34 +194,53 @@ const Chatbot = () => {
 
             {/* Modern Header */}
             <div className={screen === 'intro' || screen === 'form' ? 'curved-rectangle' : ''} style={{
-              background: "linear-gradient(135deg, #0c2249, #2c5383)",
+              background: "linear-gradient(135deg, #0c2249, #5296e9ff)",
               padding: '20px',
               paddingTop: "20px",
               color: 'white',
-              minHeight: "150px"
+              minHeight: "10px"
             }}>
-                              <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <img
-                    src="./logo.png"
-                    style={{
-                      width: "45px",
-                      height: "45px",
-                      borderRadius: '50%',
-                      objectFit: 'cover',
-                      marginRight: '10px'
-                    }}
-                  />
-                  {screen === 'chat' && (
-                    <h4 style={{
-                      fontSize: "16px",
-                      fontWeight: "bold"
-                    }}>{userName}</h4>
-                  )}
-                </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src="./logo.png"
+                  style={{
+                    width: "45px",
+                    height: "45px",
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    marginRight: '10px'
+                  }}
+                />
+                {screen === 'chat' && (
+                  <h4 style={{
+                    fontSize: "16px",
+                    fontWeight: "bold"
+                  }}>Robo Growth Parnters</h4>
+                )}
+              </div>
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
               </div>
-              <b><h3 style={{ margin: 0, textDecoration: "bold", fontFamily: "", fontSize:"25px",fontWeight:"bold" }}>Hi {userName} 👋</h3></b>
-              <p style={{ margin: 0, fontSize: 15, paddingTop: '10px' }}>I am <b>Adam</b>. How can we help ?</p>
+             {screen === 'intro' && (
+  <>
+    <h3 style={{ 
+      margin: 0, 
+      fontFamily: "", 
+      fontSize: "25px", 
+      fontWeight: "bold" 
+    }}>
+      <b>AI Assistant</b>
+    </h3>
+    <p style={{ 
+      margin: 0, 
+      fontSize: 15, 
+      paddingTop: '10px',
+      paddingRight: "10px" 
+    }}>
+      👋 Hi, I’m <b>Adam</b> from <b>RoboGrowth</b>. How can we help?
+    </p>
+  </>
+)}
+
             </div>
 
             {/* Main Body */}
@@ -287,7 +306,7 @@ const Chatbot = () => {
                 </motion.div>
               )}
 
-            
+
 
               {screen === 'chat' && (
                 <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -377,7 +396,7 @@ const Chatbot = () => {
                 background: '#f8f9fa',
                 fontFamily: "'Segoe UI', sans-serif",
                 fontWeight: 500,
-                boxShadow: (screen === 'intro' ) ? "0 5px 10px #b3b3b3ff" : "none"
+                boxShadow: (screen === 'intro') ? "0 5px 10px #b3b3b3ff" : "none"
               }}
             >
               {[
