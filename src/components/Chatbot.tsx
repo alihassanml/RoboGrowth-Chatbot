@@ -14,7 +14,7 @@ type Message = {
 };
 
 const Chatbot = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [screen, setScreen] = useState<'intro'  | 'chat'>('intro');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -155,7 +155,7 @@ const Chatbot = () => {
   return (
     <>
       {/* Floating toggle button */}
-      <Button
+      {/* <Button
         onClick={() => setIsOpen(!isOpen)}
         style={{
           position: 'fixed',
@@ -176,7 +176,7 @@ const Chatbot = () => {
         }}
       >
         {isOpen ? <FaChevronDown size={22} /> : (<><FiMessageCircle size={22} /><span>Need Help</span></>)}
-      </Button>
+      </Button> */}
 
       {isOpen && (
         <motion.div
@@ -185,8 +185,8 @@ const Chatbot = () => {
           transition={{ duration: 0.4 }}
           style={{
             position: 'fixed',
-            bottom: '80px',
-            right: '20px',
+            bottom: '-0px',
+            right: '0px',
             zIndex: 10000,
           }}
         >
