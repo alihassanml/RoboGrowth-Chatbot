@@ -196,10 +196,23 @@ const Chatbot = () => {
             <div className={screen === 'intro' || screen === 'form' ? 'curved-rectangle' : ''} style={{
               background: "linear-gradient(135deg, #3484daff, #2fc4e2ff)",
               padding: '20px',
-              paddingTop: "40px",
+              paddingTop: "20px",
               color: 'white',
               minHeight: "150px"
             }}>
+                              <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <img
+                    src="./logo.jpg"
+                    style={{
+                      width: "45px",
+                      height: "45px",
+                      borderRadius: '50%',
+                      objectFit: 'cover',
+                      marginRight: '10px'
+                    }}
+                  />
+
+                </div>
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
               </div>
               <b><h3 style={{ margin: 0, textDecoration: "bold", fontFamily: "" }}>Hi {userName} 👋</h3></b>
