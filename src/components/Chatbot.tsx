@@ -194,7 +194,7 @@ const Chatbot = () => {
 
             {/* Modern Header */}
             <div className={screen === 'intro' || screen === 'form' ? 'curved-rectangle' : ''} style={{
-              background: "linear-gradient(135deg, #3484daff, #2fc4e2ff)",
+              background: "linear-gradient(135deg, #0c2249, #2c5383)",
               padding: '20px',
               paddingTop: "20px",
               color: 'white',
@@ -202,7 +202,7 @@ const Chatbot = () => {
             }}>
                               <div style={{ display: 'flex', alignItems: 'center' }}>
                   <img
-                    src="./logo.jpg"
+                    src="./logo.png"
                     style={{
                       width: "45px",
                       height: "45px",
@@ -211,11 +211,16 @@ const Chatbot = () => {
                       marginRight: '10px'
                     }}
                   />
-
+                  {screen === 'chat' && (
+                    <h4 style={{
+                      fontSize: "16px",
+                      fontWeight: "bold"
+                    }}>{userName}</h4>
+                  )}
                 </div>
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
               </div>
-              <b><h3 style={{ margin: 0, textDecoration: "bold", fontFamily: "" }}>Hi {userName} 👋</h3></b>
+              <b><h3 style={{ margin: 0, textDecoration: "bold", fontFamily: "", fontSize:"25px",fontWeight:"bold" }}>Hi {userName} 👋</h3></b>
               <p style={{ margin: 0, fontSize: 15, paddingTop: '10px' }}>I am <b>Adam</b>. How can we help ?</p>
             </div>
 
@@ -290,7 +295,7 @@ const Chatbot = () => {
                     {messages.map((msg, idx) => (
                       <div key={idx} style={{ display: 'flex', justifyContent: msg.type === 'user' ? 'flex-end' : 'flex-start', marginBottom: '8px' }}>
                         {msg.type === 'bot' && (
-                          <img src="./logo.jpg" alt="Bot" style={{ width: '28px', height: '28px', marginRight: '8px', borderRadius: '50%', backgroundColor: 'green' }} />
+                          <img src="./logo.png" alt="Bot" style={{ width: '28px', height: '28px', marginRight: '8px', borderRadius: '50%', backgroundColor: 'black' }} />
                         )}
                         <div style={{
                           maxWidth: '75%',
@@ -299,7 +304,7 @@ const Chatbot = () => {
                           paddingRight: '13px',
                           borderRadius: '30px',
                           color: msg.type === 'user' ? 'white' : 'black',
-                          background: msg.type === 'user' ? 'rgba(43, 149, 211, 1)' : '#f1f1f1',
+                          background: msg.type === 'user' ? 'linear-gradient(135deg, #0c2249, #2c5383)' : '#f1f1f1',
                           fontSize: "14px"
                         }}>
                           <ReactMarkdown>{msg.text}</ReactMarkdown>
@@ -308,7 +313,7 @@ const Chatbot = () => {
                     ))}
                     {typingMessage && (
                       <div style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
-                        <img src="./logo.jpg" alt="Bot" style={{ width: '28px', height: '28px', marginRight: '8px', borderRadius: '50%', backgroundColor: 'green' }} />
+                        <img src="./logo.png" alt="Bot" style={{ width: '28px', height: '28px', marginRight: '8px', borderRadius: '50%', backgroundColor: 'black' }} />
                         <div className="typing-indicator">
                           <div className="typing-dot"></div>
                           <div className="typing-dot"></div>
@@ -346,7 +351,7 @@ const Chatbot = () => {
                       style={{
                         marginLeft: '8px',
                         borderRadius: '50%',
-                        background: "linear-gradient(135deg, #3484daff, #2fc4e2ff)",
+                        background: "linear-gradient(135deg, #0c2249, #2c5383)",
                         width: '40px',
                         border: "none",
                         height: '40px',
@@ -391,7 +396,7 @@ const Chatbot = () => {
                     style={{
                       textAlign: 'center',
                       cursor: 'pointer',
-                      color: isActive ? '#2f9ae2ff' : '#555',
+                      color: isActive ? '#2c5383' : '#555',
                       padding: '5px 10px',
                       borderRadius: '8px'
                     }}
