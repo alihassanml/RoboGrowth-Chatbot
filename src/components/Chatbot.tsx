@@ -125,28 +125,28 @@ const Chatbot = () => {
     handleBotResponse(prompt);
   };
 
-  const handleFormSubmit = () => {
-    setScreen("chat");
-    const pendingPrompt = sessionStorage.getItem("pending_prompt");
-    const firstMessage = `User info: Name = ${name}, Email = ${email}${pendingPrompt ? `\n\n${pendingPrompt}` : ""}`;
-    handleBotResponse(firstMessage);
 
-    sessionStorage.removeItem("pending_prompt");
-
-  };
 
   // Function to handle direct messaging without form
-  const handleDirectMessage = () => {
-    setScreen("chat");
-    // If no user info stored, send anonymous message
-    const storedName = sessionStorage.getItem("chat_name");
-    const storedEmail = sessionStorage.getItem("chat_email");
+  const [firstMessageSent, setFirstMessageSent] = useState(() => {
+  return sessionStorage.getItem("first_message_sent") === "true";
+});
 
-    if (!storedName || !storedEmail) {
-      // Start chat as anonymous user
-      handleBotResponse("Hello, I'd like to start a conversation.");
-    }
-  };
+const handleDirectMessage = () => {
+  setScreen("chat");
+
+  if (firstMessageSent) return; // prevent re-sending
+
+  const storedName = sessionStorage.getItem("chat_name");
+  const storedEmail = sessionStorage.getItem("chat_email");
+
+  if (!storedName || !storedEmail) {
+    handleBotResponse("Hello, I'd like to start a conversation.");
+  }
+
+  setFirstMessageSent(true);
+  sessionStorage.setItem("first_message_sent", "true");
+};
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -194,7 +194,7 @@ const Chatbot = () => {
 
             {/* Modern Header */}
             <div className={screen === 'intro' || screen === 'form' ? 'curved-rectangle' : ''} style={{
-              background: "linear-gradient(135deg, #0c2249, #5296e9ff)",
+              background: "linear-gradient(135deg, #2a2d61, #5296e9ff)",
               padding: '20px',
               paddingTop: "20px",
               color: 'white',
@@ -323,7 +323,7 @@ const Chatbot = () => {
                           paddingRight: '13px',
                           borderRadius: '30px',
                           color: msg.type === 'user' ? 'white' : 'black',
-                          background: msg.type === 'user' ? 'linear-gradient(135deg, #0c2249, #2c5383)' : '#f1f1f1',
+                          background: msg.type === 'user' ? 'linear-gradient(135deg, #2a2d61, #2c5383)' : '#f1f1f1',
                           fontSize: "14px"
                         }}>
                           <ReactMarkdown>{msg.text}</ReactMarkdown>
@@ -370,7 +370,7 @@ const Chatbot = () => {
                       style={{
                         marginLeft: '8px',
                         borderRadius: '50%',
-                        background: "linear-gradient(135deg, #0c2249, #2c5383)",
+                        background: "linear-gradient(135deg, #2a2d61, #2c5383)",
                         width: '40px',
                         border: "none",
                         height: '40px',
