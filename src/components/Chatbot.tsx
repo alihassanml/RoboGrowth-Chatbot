@@ -219,7 +219,7 @@ const Chatbot = () => {
             zIndex: 10000,
           }}
         >
-          <Card style={{ width: '400px', height: '630px', display: 'flex', flexDirection: 'column', borderRadius: "30px", overflow: "hidden",marginBottom:"20px" }}>
+          <Card style={{ width: '400px', height: '630px', display: 'flex', flexDirection: 'column', borderRadius: "30px", overflow: "hidden" }}>
 
             {/* Modern Header */}
             <div className={screen === 'intro' || screen === 'form' ? '' : ''} style={{
@@ -331,7 +331,9 @@ const Chatbot = () => {
                           paddingLeft: '15px',
                           paddingTop: '10px',
                           paddingRight: '13px',
-                          borderRadius: '40px',
+                          borderRadius: '30px',
+                          borderBottomLeftRadius: msg.type === 'user' ? "30px":"0px",
+                          borderBottomRightRadius: msg.type === 'user' ? "0px":"30px",
                           color: msg.type === 'user' ? 'white' : 'black',
                           background: msg.type === 'user' ? 'linear-gradient(135deg, #2a2d61, #2c5383)' : '#f1f1f1',
                           fontSize: "14px"
