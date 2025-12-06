@@ -162,15 +162,15 @@ const Chatbot = () => {
     },
     {
       question: "What services do you offer?",
-      answer: "We offer integrated services including Google Map Pack Rankings, Custom AI Agents (voice & SMS) for lead qualification, WordPress website development, Web & Funnel GEO optimization, AI‑powered social media management, and Google review management — all designed to boost local visibility and lead conversion. "
+      answer: "We offer integrated services including Google Map Pack Rankings, Custom AI Agents (voice & SMS) for lead qualification, WordPress website development, Web & Funnel GEO optimization, AI‑powered social media management, and Google review management  all designed to boost local visibility and lead conversion. "
     },
     {
       question: "How quickly can I expect to see results?",
-      answer: "Most clients see measurable improvements within 2–4 weeks. You’ll typically notice more phone calls, better Google rankings, and higher lead conversion rates within your first month, with results compounding over time."
+      answer: "Most clients see measurable improvements within 2 4 weeks. You’ll typically notice more phone calls, better Google rankings, and higher lead conversion rates within your first month, with results compounding over time."
     },
     {
       question: "Do I need to understand AI or technology to work with you?",
-      answer: "Not at all. We handle all technical setup and automation — our systems run in the background while you focus on your core business. We’ll also train you on any interface you need to access."
+      answer: "Not at all. We handle all technical setup and automation  our systems run in the background while you focus on your core business. We’ll also train you on any interface you need to access."
     },
     {
       question: "Can you work with my existing website?",
@@ -182,15 +182,15 @@ const Chatbot = () => {
     },
     {
       question: "How do you measure success?",
-      answer: "We track metrics that matter — increased phone calls, improved 'Map Pack' rankings, higher lead conversion rates, more positive reviews, stronger online visibility, and ultimately revenue growth. You'll get transparent reporting so you see exactly how marketing efforts translate to business results."
+      answer: "We track metrics that matter  increased phone calls, improved 'Map Pack' rankings, higher lead conversion rates, more positive reviews, stronger online visibility, and ultimately revenue growth. You'll get transparent reporting so you see exactly how marketing efforts translate to business results."
     },
     {
       question: "Do I need to commit long‑term?",
-      answer: "We believe in delivering value, not locking clients into lengthy contracts. We typically recommend a minimum 90‑day commitment to see meaningful results, but beyond that we focus on performance and results — not contracts."
+      answer: "We believe in delivering value, not locking clients into lengthy contracts. We typically recommend a minimum 90‑day commitment to see meaningful results, but beyond that we focus on performance and results  not contracts."
     },
     {
       question: "Can you guarantee first‑page Google rankings?",
-      answer: "No — we can’t guarantee specific rankings because search algorithms (like Google’s) change frequently. What we DO guarantee is our proven process, dedicated effort, and transparent reporting. Most clients see significant improvements within 30–60 days."
+      answer: "No  we can’t guarantee specific rankings because search algorithms (like Google’s) change frequently. What we DO guarantee is our proven process, dedicated effort, and transparent reporting. Most clients see significant improvements within 30 60 days."
     },
     {
       question: "What if my business is seasonal?",
@@ -219,11 +219,11 @@ const Chatbot = () => {
             zIndex: 10000,
           }}
         >
-          <Card style={{ width: '400px', height: '630px', display: 'flex', flexDirection: 'column', borderRadius: "30px", overflow: "hidden" }}>
+          <Card style={{ width: '400px', height: '630px', display: 'flex', flexDirection: 'column', borderRadius: "30px", overflow: "hidden",marginBottom:"20px" }}>
 
             {/* Modern Header */}
             <div className={screen === 'intro' || screen === 'form' ? '' : ''} style={{
-              background: "linear-gradient(135deg, #2a2d61, #5296e9ff)",
+              background: "linear-gradient(135deg, #2f3155ff, #5296e9ff)",
               padding: '20px',
               paddingTop: "20px",
               color: 'white',
