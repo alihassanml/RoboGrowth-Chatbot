@@ -59,7 +59,7 @@ const Chatbot = () => {
   ];
 
   useEffect(() => {
-        setScreen("chat");
+    setScreen("chat");
   }, [isOpen]);
 
   const handleBotResponse = async (userMessage: string) => {
@@ -146,31 +146,66 @@ const Chatbot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, typingMessage]);
 
+  // AUTO SEND FIRST BOT MESSAGE WHEN CHAT OPENS
+  useEffect(() => {
+    if (isOpen && screen === "chat" && !firstMessageSent) {
+      handleBotResponse("Hello, I'd like to start a conversation.");
+      setFirstMessageSent(true);
+      sessionStorage.setItem("first_message_sent", "true");
+    }
+  }, [isOpen, screen, firstMessageSent]);
+
+  const faqData = [
+    {
+      question: "What is Robo Growth Partners?",
+      answer: "Robo Growth Partners is a growth consultancy dedicated to local service businesses, combining proven marketing strategies with AI automation to help contractors, medical practices, legal firms, and other service‑based companies dominate their local markets."
+    },
+    {
+      question: "What services do you offer?",
+      answer: "We offer integrated services including Google Map Pack Rankings, Custom AI Agents (voice & SMS) for lead qualification, WordPress website development, Web & Funnel GEO optimization, AI‑powered social media management, and Google review management — all designed to boost local visibility and lead conversion. "
+    },
+    {
+      question: "How quickly can I expect to see results?",
+      answer: "Most clients see measurable improvements within 2–4 weeks. You’ll typically notice more phone calls, better Google rankings, and higher lead conversion rates within your first month, with results compounding over time."
+    },
+    {
+      question: "Do I need to understand AI or technology to work with you?",
+      answer: "Not at all. We handle all technical setup and automation — our systems run in the background while you focus on your core business. We’ll also train you on any interface you need to access."
+    },
+    {
+      question: "Can you work with my existing website?",
+      answer: "Yes. If your current website meets basic technical standards (speed, mobile optimization, local‑SEO readiness), we can work with it. If not, we may recommend building a new WordPress site for best results."
+    },
+    {
+      question: "Who are your services designed for?",
+      answer: "We specialize in local service businesses: HVAC, plumbing, electrical, home services, medical practices, dental offices, law firms, accounting, and other professional or trade‑based services that rely on local customers."
+    },
+    {
+      question: "How do you measure success?",
+      answer: "We track metrics that matter — increased phone calls, improved 'Map Pack' rankings, higher lead conversion rates, more positive reviews, stronger online visibility, and ultimately revenue growth. You'll get transparent reporting so you see exactly how marketing efforts translate to business results."
+    },
+    {
+      question: "Do I need to commit long‑term?",
+      answer: "We believe in delivering value, not locking clients into lengthy contracts. We typically recommend a minimum 90‑day commitment to see meaningful results, but beyond that we focus on performance and results — not contracts."
+    },
+    {
+      question: "Can you guarantee first‑page Google rankings?",
+      answer: "No — we can’t guarantee specific rankings because search algorithms (like Google’s) change frequently. What we DO guarantee is our proven process, dedicated effort, and transparent reporting. Most clients see significant improvements within 30–60 days."
+    },
+    {
+      question: "What if my business is seasonal?",
+      answer: "That’s fine. We’ve helped many clients with seasonal demand fluctuations. We adjust our marketing strategies accordingly: ramp up during peak seasons and maintain baseline visibility during slower periods so you don’t miss opportunities."
+    }
+  ];
+
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
     <>
-      {/* Floating toggle button */}
-      {/* <Button
-        onClick={() => setIsOpen(!isOpen)}
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          width: isOpen ? '50px' : '180px',
-          height: '50px',
-          borderRadius: isOpen ? '50%' : '25px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '8px',
-          background: "linear-gradient(135deg, #3484daff, #2fc4e2ff)",
-          border: "none",
-          color: 'white',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-          zIndex: 9999
-        }}
-      >
-        {isOpen ? <FaChevronDown size={22} /> : (<><FiMessageCircle size={22} /><span>Need Help</span></>)}
-      </Button> */}
 
       {isOpen && (
         <motion.div
@@ -206,27 +241,27 @@ const Chatbot = () => {
                   }}
                 />
                 <h3 style={{
-                    margin: 0,
-                    fontFamily: "",
-                    fontSize: "25px",
-                    fontWeight: "bold"
-                  }}>
-                    <b>AI Assistant</b>
-                  </h3>
+                  margin: 0,
+                  fontFamily: "",
+                  fontSize: "25px",
+                  fontWeight: "bold"
+                }}>
+                  <b>AI Assistant</b>
+                </h3>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
               </div>
-                <>
-                 
-                  <p style={{
-                    margin: 0,
-                    fontSize: 15,
-                    paddingTop: '10px',
-                    paddingRight: "10px"
-                  }}>
-                     Hi, I’m <b>Adam</b> from <b>RoboGrowth</b>. How can we help?
-                  </p>
-                </>
+              <>
+
+                <p style={{
+                  margin: 0,
+                  fontSize: 15,
+                  paddingTop: '10px',
+                  paddingRight: "10px"
+                }}>
+                  Hi, I’m <b>Adam</b> from <b>RoboGrowth</b>. How can we help?
+                </p>
+              </>
 
             </div>
 
@@ -234,63 +269,53 @@ const Chatbot = () => {
             <Card.Body style={{ overflowY: 'auto', flex: 1, padding: '10px' }}>
 
               {screen === 'intro' && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '15px' }}
-                >
-                  {/* Send a message card */}
-                  {/* <div
-                    style={{
-                      background: 'white',
-                      borderRadius: '10px',
-                      padding: '15px',
-                      marginBottom: '12px',
-                      boxShadow: '0 2px 20px rgba(0, 0, 0, 0.1)',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      cursor: 'pointer'
-                    }}
-                    onClick={() => handleHelpClick("Send us a message")}
-                  >
-                    <div>
-                      <strong style={{ fontSize: '15px', color: '#000' }}>Send us a message</strong>
-                      <p style={{ margin: 0, fontSize: '13px', color: '#666' }}>We typically reply within an hour</p>
-                    </div>
-                    <FaChevronRight color="#3484daff" size={16} />
-                  </div> */}
-
-                  {/* Search for help card */}
-                  <div
-                    style={{
-                      background: 'white',
-                      borderRadius: '10px',
-                      padding: '10px 15px',
-                      boxShadow: '0 2px 20px rgba(0,0,0,0.1)'
-                    }}
-                  >
-                    {/* Help options */}
-                    {helpOptions.map((opt, idx) => (
-                      <div
-                        key={idx}
+                <div style={{ padding: "20px", maxWidth: "700px", margin: "auto" }}>
+                  <h5 style={{ textAlign: "center", marginBottom: "20px", fontWeight: "600", fontSize: "18px" }}>Frequently Asked Questions</h5>
+                  {faqData.map((faq, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        border: "1px solid #ecebeb",
+                        borderRadius: "10px",
+                        marginBottom: "12px",
+                        overflow: "hidden",
+                        boxShadow: openIndex === index ? "0 4px 12px rgba(0,0,0,0.1)" : "0 2px 6px rgba(0,0,0,0.05)",
+                        transition: "box-shadow 0.3s ease",
+                      }}
+                    >
+                      <button
+                        onClick={() => toggleFAQ(index)}
                         style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          padding: '14px 15px ',
-                          borderBottom: idx < helpOptions.length - 1 ? '1px solid #eee' : 'none',
-                          cursor: 'pointer'
+                          width: "100%",
+                          background: "#ffffff",
+                          border: "none",
+                          padding: "12px 20px",
+                          textAlign: "left",
+                          fontSize: "14px",
+                          fontWeight: "500",
+                          cursor: "pointer",
+                          outline: "none",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
                         }}
-                        onClick={() => handleHelpClick(opt)}
                       >
-                        <span style={{ color: '#000', fontSize: '14px' }}>{opt}</span>
-                        <FaChevronRight color="#ccc" size={14} />
+                        {faq.question}
+                        <span style={{ transform: openIndex === index ? "rotate(45deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}>+</span>
+                      </button>
+                      <div
+                        style={{
+                          maxHeight: openIndex === index ? "500px" : "0",
+                          transition: "max-height 0.4s ease, padding 0.4s ease",
+                          padding: openIndex === index ? "10px 20px 15px" : "0 20px",
+                          background: "#fafafa",
+                        }}
+                      >
+                        <p style={{ margin: 0, fontSize: "13px", color: "#555" }}>{faq.answer}</p>
                       </div>
-                    ))}
-                  </div>
-                </motion.div>
+                    </div>
+                  ))}
+                </div>
               )}
 
 
@@ -300,15 +325,13 @@ const Chatbot = () => {
                   <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '10px' }}>
                     {messages.map((msg, idx) => (
                       <div key={idx} style={{ display: 'flex', justifyContent: msg.type === 'user' ? 'flex-end' : 'flex-start', marginBottom: '8px' }}>
-                        {msg.type === 'bot' && (
-                          <img src="./logo.png" alt="Bot" style={{ width: '28px', height: '28px', marginRight: '8px', borderRadius: '50%', backgroundColor: 'black' }} />
-                        )}
+
                         <div style={{
                           maxWidth: '75%',
-                          paddingLeft: '13px',
-                          paddingTop: '14px',
+                          paddingLeft: '15px',
+                          paddingTop: '10px',
                           paddingRight: '13px',
-                          borderRadius: '30px',
+                          borderRadius: '40px',
                           color: msg.type === 'user' ? 'white' : 'black',
                           background: msg.type === 'user' ? 'linear-gradient(135deg, #2a2d61, #2c5383)' : '#f1f1f1',
                           fontSize: "14px"
@@ -319,7 +342,6 @@ const Chatbot = () => {
                     ))}
                     {typingMessage && (
                       <div style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '8px' }}>
-                        <img src="./logo.png" alt="Bot" style={{ width: '28px', height: '28px', marginRight: '8px', borderRadius: '50%', backgroundColor: 'black' }} />
                         <div className="typing-indicator">
                           <div className="typing-dot"></div>
                           <div className="typing-dot"></div>
