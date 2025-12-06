@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactMarkdown from 'react-markdown';
 import { motion } from "framer-motion";
 import { FaChevronRight } from 'react-icons/fa';
+import { Send, Home, MessageCircle, HelpCircle, Phone, Mail, Calendar, ChevronRight, Wrench } from 'lucide-react';
+
 
 type Message = {
   type: 'bot' | 'user';
@@ -57,15 +59,7 @@ const Chatbot = () => {
   ];
 
   useEffect(() => {
-    if (isOpen) {
-      const nameStored = sessionStorage.getItem("chat_name");
-      const emailStored = sessionStorage.getItem("chat_email");
-      if (nameStored && emailStored) {
         setScreen("chat");
-      } else {
-        setScreen("intro");
-      }
-    }
   }, [isOpen]);
 
   const handleBotResponse = async (userMessage: string) => {
@@ -129,24 +123,24 @@ const Chatbot = () => {
 
   // Function to handle direct messaging without form
   const [firstMessageSent, setFirstMessageSent] = useState(() => {
-  return sessionStorage.getItem("first_message_sent") === "true";
-});
+    return sessionStorage.getItem("first_message_sent") === "true";
+  });
 
-const handleDirectMessage = () => {
-  setScreen("chat");
+  const handleDirectMessage = () => {
+    setScreen("chat");
 
-  if (firstMessageSent) return; // prevent re-sending
+    if (firstMessageSent) return; // prevent re-sending
 
-  const storedName = sessionStorage.getItem("chat_name");
-  const storedEmail = sessionStorage.getItem("chat_email");
+    const storedName = sessionStorage.getItem("chat_name");
+    const storedEmail = sessionStorage.getItem("chat_email");
 
-  if (!storedName || !storedEmail) {
-    handleBotResponse("Hello, I'd like to start a conversation.");
-  }
+    if (!storedName || !storedEmail) {
+      handleBotResponse("Hello, I'd like to start a conversation.");
+    }
 
-  setFirstMessageSent(true);
-  sessionStorage.setItem("first_message_sent", "true");
-};
+    setFirstMessageSent(true);
+    sessionStorage.setItem("first_message_sent", "true");
+  };
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -193,7 +187,7 @@ const handleDirectMessage = () => {
           <Card style={{ width: '400px', height: '630px', display: 'flex', flexDirection: 'column', borderRadius: "30px", overflow: "hidden" }}>
 
             {/* Modern Header */}
-            <div className={screen === 'intro' || screen === 'form' ? 'curved-rectangle' : ''} style={{
+            <div className={screen === 'intro' || screen === 'form' ? '' : ''} style={{
               background: "linear-gradient(135deg, #2a2d61, #5296e9ff)",
               padding: '20px',
               paddingTop: "20px",
@@ -211,35 +205,28 @@ const handleDirectMessage = () => {
                     marginRight: '10px'
                   }}
                 />
-                {screen === 'chat' && (
-                  <h4 style={{
-                    fontSize: "16px",
+                <h3 style={{
+                    margin: 0,
+                    fontFamily: "",
+                    fontSize: "25px",
                     fontWeight: "bold"
-                  }}>Robo Growth Parnters</h4>
-                )}
+                  }}>
+                    <b>AI Assistant</b>
+                  </h3>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
               </div>
-             {screen === 'intro' && (
-  <>
-    <h3 style={{ 
-      margin: 0, 
-      fontFamily: "", 
-      fontSize: "25px", 
-      fontWeight: "bold" 
-    }}>
-      <b>AI Assistant</b>
-    </h3>
-    <p style={{ 
-      margin: 0, 
-      fontSize: 15, 
-      paddingTop: '10px',
-      paddingRight: "10px" 
-    }}>
-      👋 Hi, I’m <b>Adam</b> from <b>RoboGrowth</b>. How can we help?
-    </p>
-  </>
-)}
+                <>
+                 
+                  <p style={{
+                    margin: 0,
+                    fontSize: 15,
+                    paddingTop: '10px',
+                    paddingRight: "10px"
+                  }}>
+                     Hi, I’m <b>Adam</b> from <b>RoboGrowth</b>. How can we help?
+                  </p>
+                </>
 
             </div>
 
@@ -254,7 +241,7 @@ const handleDirectMessage = () => {
                   style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '15px' }}
                 >
                   {/* Send a message card */}
-                  <div
+                  {/* <div
                     style={{
                       background: 'white',
                       borderRadius: '10px',
@@ -273,7 +260,7 @@ const handleDirectMessage = () => {
                       <p style={{ margin: 0, fontSize: '13px', color: '#666' }}>We typically reply within an hour</p>
                     </div>
                     <FaChevronRight color="#3484daff" size={16} />
-                  </div>
+                  </div> */}
 
                   {/* Search for help card */}
                   <div
@@ -400,8 +387,9 @@ const handleDirectMessage = () => {
               }}
             >
               {[
-                { icon: FaHome, label: 'Home', screenName: 'intro' },
-                { icon: FaEnvelope, label: 'Messages', screenName: 'chat' },
+                { icon: FaEnvelope, label: "Chat", screenName: 'chat' },
+
+                { icon: HelpCircle, label: 'FAQ', screenName: 'intro' },
               ].map((item, idx) => {
                 const Icon = item.icon;
                 const isActive = screen === item.screenName;
